@@ -1,11 +1,10 @@
-using System.Collections.Generic;
-using BlazingPizza.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using BlazingPizza.Data;
 
 namespace BlazingPizza.Controllers;
 
-[Route("specail")]
+[Route("specials")]
 [ApiController]
 public class SpecialsController : Controller
 {
@@ -13,11 +12,12 @@ public class SpecialsController : Controller
 
     public SpecialsController(PizzaStoreContext db)
     {
-        this._db = db;
+        _db = db;
     }
 
+    [HttpGet]
     public async Task<ActionResult<List<PizzaSpecial>>> GetSpecials()
     {
-        return (await _db.Specials.ToListAsync()).OrderByDescending(sp => sp.BasePrice).ToList();
+        return (await _db.Specials.ToListAsync()).OrderByDescending(s => s.BasePrice).ToList();
     }
 }

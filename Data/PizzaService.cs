@@ -2,7 +2,8 @@ namespace BlazingPizza.Data;
 
 public class PizzaService
 {
-    public async Task<Pizza[]> GetPizzasAsync()
+    // public async  Task<Pizza[]> GetPizzasAsync()
+    public  Task<Pizza[]> GetPizzasAsync()
     {
         var pizzases = new Pizza[]
         {
@@ -12,7 +13,7 @@ public class PizzaService
             new Pizza(){PizzaId= 4,Name="Perperoni",Description="Special Cheese", Vegetarian=false,Vegan = false},
             new Pizza(){PizzaId= 5,Name="Fiorenta",Description="Special Cheese", Vegetarian=false,Vegan = false},
             };
-        // return Task.FromResult(pizzases);
-        return pizzases;
+        return Task.FromResult(pizzases);
+        //return pizzases;
     }
 }
