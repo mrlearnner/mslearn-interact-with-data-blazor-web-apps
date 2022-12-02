@@ -1,7 +1,12 @@
+using BlazingPizza.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+// Pizza Service
+builder.Services.AddSingleton<PizzaService>();
 
 var app = builder.Build();
 
@@ -16,5 +21,7 @@ app.UseRouting();
 app.MapRazorPages();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
+
 
 app.Run();
