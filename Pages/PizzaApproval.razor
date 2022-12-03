@@ -1,0 +1,71 @@
+@page "/pizzaapproval"
+@using System.Globalization
+
+<div class="main">
+<div style="display: block;">
+    <h3 style="color: red;">Bind elements to specific events</h3>
+<p>
+    
+    Your email address is:
+    <input @bind="customerEmail" />
+</p>
+<h5>My favorite pizza is: @favPizza</h5>
+<p>
+    Enter your favorite pizza:
+    <input @bind="favPizza" />
+</p>
+<h5>My favorite pizza is: @favPizza</h5>
+<p>
+    vegan: <strong>@((vegan)? "Yes" : "No")</strong>
+    <input type="checkbox" @bind="vegan">
+</p>
+<p>
+    Enter your favorite pizza:
+    <input @bind-value="favPizza" @bind-value:event="oninput"/>
+</p>
+</div>
+
+<div style="display: block;">
+<h3 style="color: red;">Format bound values</h3>
+
+<h5>Order a pizza for your birthday!</h5>
+<p>Enter your birth date: @birthdate.ToString("MMMM dd, yyyy")</p>
+<p>
+    <input @bind="birthdate"  @bind:format="dd-MM-yyyy" />
+</p>
+
+<h5>Pizza: @PizzaName</h5>
+
+<p>Approval rating: @approvalRating</p>
+
+<p>
+    <label>
+        Set a new approval rating:
+        <input @bind="ApprovalRating" />
+    </label>
+</p>
+</div>
+</div>
+@code {
+    private DateTime birthdate { get; set; } = new(2000, 1, 1);
+    bool vegan;
+    private string favPizza { get; set; } = "Margherita";
+    private string customerEmail = "john.doe@contoso.com";
+    private string PizzaName;
+    private decimal approvalRating = 1.0M;
+    private NumberStyles style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign;
+    private CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+
+    private string ApprovalRating 
+    {
+        get => approvalRating.ToString("0.000",culture);
+        set 
+        {
+            if(decimal.TryParse(value,style,culture,out var number))
+            {
+                approvalRating = Math.Round(number,3);
+            }
+        }
+    }
+
+}
