@@ -4,11 +4,6 @@
 @inject HttpClient HttpClient
 @inject NavigationManager NavigationManager
 
-<div class="top-bar">
-    <a class="logo" href="">
-        <img src="img/logo.svg" />
-    </a>
-
     @* <a href="" class="nav-tab">
         <img src="img/pizza-slice.svg" />
         <div>Get Pizza</div>
@@ -17,6 +12,11 @@
         <img src="img/bike.svg" />
         <div>My orders</div>
     </a> *@
+@* <div class="top-bar">
+    <a class="logo" href="">
+        <img src="img/logo.svg" />
+    </a>
+
     <NavLink href="" class="nav-tab" Match="NavLinkMatch.All">
         <img src="img/pizza-slice.svg" />
         <div>Get Pizza</div>
@@ -27,7 +27,7 @@
         <div>My Orders</div>
     </NavLink>
 
-</div>
+</div> *@
 
 <div class="main">
     <div class="checkout-cols">
@@ -69,6 +69,7 @@
         var newOrderId= await response.Content.ReadFromJsonAsync<int>();
         OrderState.ResetOrder();
         @* NavigationManager.NavigateTo("myorders/{newOrderId}"); *@
-        NavigationManager.NavigateTo($"myorders/{newOrderId}");
+        @* NavigationManager.NavigateTo($"myorders/{newOrderId}"); *@
+        NavigationManager.NavigateTo("myorders");
     }
 }
